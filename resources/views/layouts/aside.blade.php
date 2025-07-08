@@ -95,6 +95,7 @@
             @endif
 
             @if ($role == 'guru')
+                <li class="nav-header">Absensi</li>
                 <li class="nav-item">
                     <a href="{{ route('guru.data-absen') }}"
                         class="nav-link {{ isset($path[1]) && $path[1] === 'data-absen' ? 'active' : '' }}">
