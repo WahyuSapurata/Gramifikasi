@@ -87,6 +87,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::delete('/deleted-data-soalpembelajaran/{params}', 'SoalPembelajaranController@deleted')->name('deleted-data-soalpembelajaran');
 
         Route::get('penilaian-pembelajaran', 'SoalPembelajaranController@penilaian')->name('penilaian-pembelajaran');
+
+        Route::get('/data-absen', 'AbsenController@index')->name('data-absen');
+        Route::get('/add-absen', 'AbsenController@add')->name('add-absen');
+        Route::post('/store-absen', 'AbsenController@store')->name('store-absen');
+        Route::get('/rekap-absen', 'AbsenController@rekap_absen')->name('rekap-absen');
     });
 
     Route::group(['prefix' => 'siswa', 'middleware' => ['auth.siswa'], 'as' => 'siswa.'], function () {

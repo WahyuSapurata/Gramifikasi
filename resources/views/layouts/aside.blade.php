@@ -95,6 +95,20 @@
             @endif
 
             @if ($role == 'guru')
+                <li class="nav-item">
+                    <a href="{{ route('guru.data-absen') }}"
+                        class="nav-link {{ isset($path[1]) && $path[1] === 'data-absen' ? 'active' : '' }}">
+                        <i class="fas fa-file-powerpoint nav-icon"></i>
+                        <p>Data Absen</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('guru.rekap-absen') }}"
+                        class="nav-link {{ isset($path[1]) && $path[1] === 'rekap-absen' ? 'active' : '' }}">
+                        <i class="fas fa-file nav-icon"></i>
+                        <p>Rekap Ansen</p>
+                    </a>
+                </li>
                 <li class="nav-header">Gramifikasi</li>
                 <li class="nav-item">
                     <a href="{{ route('guru.data-soal') }}"

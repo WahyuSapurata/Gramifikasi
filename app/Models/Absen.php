@@ -6,24 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
-class Akademik extends Model
+class Absen extends Model
 {
     use HasFactory;
 
-    protected $table = 'akademiks';
+    protected $table = 'absens';
     protected $primaryKey = 'id';
     protected $fillable = [
         'uuid',
-        'uuid_guru',
-        'uuid_siswa',
-        'uuid_mapel',
-        'uuid_tahun',
-        'kelas',
+        'uuid_akademik',
+        'tanggal',
+        'status',
+        'keterangan',
     ];
 
-    public function siswa()
+    public function akademik()
     {
-        return $this->belongsTo(User::class, 'uuid_siswa', 'uuid');
+        return $this->belongsTo(Akademik::class, 'uuid_akademik', 'uuid');
     }
 
     protected static function boot()

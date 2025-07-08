@@ -124,6 +124,34 @@
         });
     </script>
 
+    @if ($message = Session::get('failed'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: "Eror",
+                    text: {!! json_encode($message) !!},
+                    icon: "warning",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            });
+        </script>
+    @endif
+
+    @if ($message = Session::get('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: "Sukses",
+                    text: {!! json_encode($message) !!},
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            });
+        </script>
+    @endif
+
     @yield('script')
 </body>
 
