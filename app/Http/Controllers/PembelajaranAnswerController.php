@@ -19,7 +19,7 @@ class PembelajaranAnswerController extends BaseController
         $module = 'Soal Pembelajaran';
         $tahun_ajaran = TahunAjaran::where('status', true)->first();
         $akademik = Akademik::where('uuid_tahun', $tahun_ajaran->uuid)->where('uuid_siswa', auth()->user()->uuid)->first();
-        $soal = SoalPembelajaran::where('uuid_kategori', $kategori->uuid)->where('uuid_akademik', $akademik->uuid)->get();
+        $soal = SoalPembelajaran::where('uuid_kategori', $kategori->uuid)->where('uuid_mapel', $akademik->uuid_mapel)->get();
 
         return view('siswa.soalpembelajaran.index', compact(
             'module',
@@ -42,6 +42,7 @@ class PembelajaranAnswerController extends BaseController
                 $point = 0;
             }
             PembelajaranAnswer::create([
+                'uuid_siswa' => auth()->user()->uuid,
                 'uuid_soal' => $uuid_soal,
                 'jawaban' => $jawabanData['jawaban'],
                 'point' => $point,

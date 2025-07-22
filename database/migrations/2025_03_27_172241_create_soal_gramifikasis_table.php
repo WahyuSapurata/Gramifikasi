@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('soal_gramifikasis', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
-            $table->uuid('uuid_akademik');
+            $table->uuid('uuid_mapel');
             $table->uuid('uuid_misi');
             $table->text('soal');
             $table->json('jawaban');

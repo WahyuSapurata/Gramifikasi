@@ -14,7 +14,7 @@ class SoalGramifikasi extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'uuid',
-        'uuid_akademik',
+        'uuid_mapel',
         'uuid_misi',
         'soal',
         'jawaban',

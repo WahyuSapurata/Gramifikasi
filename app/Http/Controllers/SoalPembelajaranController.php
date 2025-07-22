@@ -20,7 +20,7 @@ class SoalPembelajaranController extends BaseController
         $tahun_ajaran = TahunAjaran::where('status', true)->first();
         $akademik = Akademik::where('uuid_tahun', $tahun_ajaran->uuid)->where('uuid_guru', auth()->user()->uuid)->first();
         $kategori = KategoriPembelajaran::all();
-        $data = SoalPembelajaran::where('uuid_akademik', $akademik->uuid)->where('uuid_kategori', $request->uuid_kategori)->get();
+        $data = SoalPembelajaran::where('uuid_mapel', $akademik->uuid_mapel)->where('uuid_kategori', $request->uuid_kategori)->get();
         return view('guru.soalpembelajaran.index', compact(
             'module',
             'tahun_ajaran',
@@ -35,7 +35,7 @@ class SoalPembelajaranController extends BaseController
         $data = array();
         try {
             $data = new SoalPembelajaran();
-            $data->uuid_akademik = $request->uuid_akademik;
+            $data->uuid_mapel = $request->uuid_mapel;
             $data->uuid_kategori = $request->uuid_kategori;
             $data->soal = $request->soal;
             $data->jawaban = $request->jawaban;
@@ -52,7 +52,7 @@ class SoalPembelajaranController extends BaseController
     {
         $data = SoalPembelajaran::where('uuid', $params)->first();
         try {
-            $data->uuid_akademik = $request->uuid_akademik;
+            $data->uuid_mapel = $request->uuid_mapel;
             $data->uuid_kategori = $request->uuid_kategori;
             $data->soal = $request->soal;
             $data->jawaban = $request->jawaban;

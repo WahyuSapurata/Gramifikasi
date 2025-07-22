@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->uuid('uuid_soal');
+            $table->uuid('uuid_siswa');
             $table->string('jawaban');
             $table->float('point');
             $table->boolean('status')->default(false);

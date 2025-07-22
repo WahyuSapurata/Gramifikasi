@@ -30,8 +30,8 @@
                                         <label for="tahun_ajaran" class="form-label">Tahun Ajaran Akademik</label>
                                         <input type="text" class="form-control" readonly
                                             value="{{ $tahun_ajaran->tahun . ' ' . $tahun_ajaran->semester }}">
-                                        <input type="hidden" id="uuid_akademik" name="uuid_akademik"
-                                            value="{{ $akademik->uuid }}">
+                                        <input type="hidden" id="uuid_mapel" name="uuid_mapel"
+                                            value="{{ $akademik->uuid_mapel }}">
                                     </div>
                                     <div class="mb-2">
                                         <label for="" class="form-label">Kelas</label>

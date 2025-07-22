@@ -21,7 +21,7 @@ class SoalGramifikasiController extends BaseController
         $tahun_ajaran = TahunAjaran::where('status', true)->first();
         $akademik = Akademik::where('uuid_tahun', $tahun_ajaran->uuid)->where('uuid_guru', auth()->user()->uuid)->first();
         $misi = Misi::all();
-        $data = SoalGramifikasi::where('uuid_akademik', $akademik->uuid)->where('uuid_misi', $request->uuid_misi)->get();
+        $data = SoalGramifikasi::where('uuid_mapel', $akademik->uuid_mapel)->where('uuid_misi', $request->uuid_misi)->get();
         return view('guru.soal.index', compact(
             'module',
             'misi',
@@ -36,7 +36,7 @@ class SoalGramifikasiController extends BaseController
         $data = array();
         try {
             $data = new SoalGramifikasi();
-            $data->uuid_akademik = $request->uuid_akademik;
+            $data->uuid_mapel = $request->uuid_mapel;
             $data->uuid_misi = $request->uuid_misi;
             $data->soal = $request->soal;
             $data->jawaban = $request->jawaban;
@@ -53,7 +53,7 @@ class SoalGramifikasiController extends BaseController
     {
         $data = SoalGramifikasi::where('uuid', $params)->first();
         try {
-            $data->uuid_akademik = $request->uuid_akademik;
+            $data->uuid_mapel = $request->uuid_mapel;
             $data->uuid_misi = $request->uuid_misi;
             $data->soal = $request->soal;
             $data->jawaban = $request->jawaban;

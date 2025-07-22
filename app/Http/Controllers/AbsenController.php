@@ -23,16 +23,15 @@ class AbsenController extends BaseController
             return back()->with('error', 'Tahun ajaran aktif tidak ditemukan.');
         }
 
-        $akademik = Akademik::where('uuid_tahun', $tahun_ajaran->uuid)
+        $akademiks = Akademik::where('uuid_tahun', $tahun_ajaran->uuid)
             ->where('uuid_guru', auth()->user()->uuid)
-            ->first();
+            ->get();
 
-        if (!$akademik) {
-            return back()->with('error', 'Data akademik tidak ditemukan.');
-        }
+        // Ambil semua UUID akademik siswa dari guru tersebut
+        $uuidAkademikList = $akademiks->pluck('uuid');
 
         // Ambil absensi + relasi ke akademik
-        $data = Absen::where('uuid_akademik', $akademik->uuid)
+        $data = Absen::whereIn('uuid_akademik', $uuidAkademikList)
             ->whereDate('tanggal', Carbon::today())
             ->with('akademik') // relasi ke akademik
             ->get();

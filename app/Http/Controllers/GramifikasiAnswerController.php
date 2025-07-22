@@ -22,8 +22,8 @@ class GramifikasiAnswerController extends BaseController
         $module = 'Detail Misi Dan Kategori';
         $tahun_ajaran = TahunAjaran::where('status', true)->first();
         $akademik = Akademik::where('uuid_tahun', $tahun_ajaran->uuid)->where('uuid_mapel', $params)->where('uuid_siswa', auth()->user()->uuid)->first();
-       // Ambil semua soal dengan uuid_akademik terkait
-        $soal_gramifikasi_all = SoalGramifikasi::where('uuid_akademik', $akademik->uuid)->orderBy('created_at', 'desc')->get();
+        // Ambil semua soal dengan uuid_akademik terkait
+        $soal_gramifikasi_all = SoalGramifikasi::where('uuid_mapel', $akademik->uuid_mapel)->orderBy('created_at', 'desc')->get();
 
         // Kelompokkan berdasarkan uuid_misi dan ambil satu data dari masing-masing
         $soal_gramifikasi = $soal_gramifikasi_all->unique('uuid_misi')->values();
@@ -54,7 +54,7 @@ class GramifikasiAnswerController extends BaseController
             return $item;
         });
 
-        $soal_pembelajaran_all = SoalPembelajaran::where('uuid_akademik', $akademik->uuid)->orderBy('created_at', 'desc')->get();
+        $soal_pembelajaran_all = SoalPembelajaran::where('uuid_mapel', $akademik->uuid_mapel)->orderBy('created_at', 'desc')->get();
 
         // Kelompokkan berdasarkan uuid_kategori dan ambil satu data dari masing-masing
         $soal_pembelajaran = $soal_pembelajaran_all->unique('uuid_kategori')->values();
@@ -89,7 +89,7 @@ class GramifikasiAnswerController extends BaseController
         $module = 'Soal Gramifikasi';
         $tahun_ajaran = TahunAjaran::where('status', true)->first();
         $akademik = Akademik::where('uuid_tahun', $tahun_ajaran->uuid)->where('uuid_siswa', auth()->user()->uuid)->first();
-        $soal = SoalGramifikasi::where('uuid_misi', $misi->uuid)->where('uuid_akademik', $akademik->uuid)->get();
+        $soal = SoalGramifikasi::where('uuid_misi', $misi->uuid)->where('uuid_mapel', $akademik->uuid_mapel)->get();
 
         return view('siswa.soalgramifikasi.index', compact(
             'module',
@@ -112,6 +112,7 @@ class GramifikasiAnswerController extends BaseController
                 $point = 0;
             }
             GramifikasiAnswer::create([
+                'uuid_siswa' => auth()->user()->uuid,
                 'uuid_soal' => $uuid_soal,
                 'jawaban' => $jawabanData['jawaban'],
                 'point' => $point,

@@ -14,6 +14,7 @@ class GramifikasiAnswer extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'uuid',
+        'uuid_siswa',
         'uuid_soal',
         'jawaban',
         'point',
