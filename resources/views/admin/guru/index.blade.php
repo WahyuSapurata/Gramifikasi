@@ -95,6 +95,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Lengkap</th>
+                                            <th>Username</th>
                                             <th>NIP</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Tempat Lahir</th>
@@ -109,6 +110,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->nama }}</td>
+                                                <td>{{ $item->username }}</td>
                                                 <td>{{ $item->nip ? $item->nip : '-' }}</td>
                                                 <td>{{ $item->jenis_kelamin ? $item->jenis_kelamin : '-' }}</td>
                                                 <td>{{ $item->tempat_lahir ? $item->tempat_lahir : '-' }}</td>

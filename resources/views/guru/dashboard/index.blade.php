@@ -70,7 +70,7 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>{{ $akademik->kelas }}</h3>
+                                <h3>{{ $akademik->first()->kelas }}</h3>
 
                                 <p>Kelas</p>
                             </div>

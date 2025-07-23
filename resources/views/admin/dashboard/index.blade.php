@@ -27,7 +27,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{ $data_tahun_ajaran->tahun }}</h3>
+                                <h3>{{ $data_tahun_ajaran ? $data_tahun_ajaran->tahun : 'Tidak Ada' }}</h3>
 
                                 <p>Tahun Ajaran</p>
                             </div>

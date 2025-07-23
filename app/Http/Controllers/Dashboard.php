@@ -41,9 +41,13 @@ class Dashboard extends BaseController
     {
         $module = 'Dashboard';
         $tahun_ajaran = TahunAjaran::where('status', true)->first();
-        $akademik = Akademik::where('uuid_tahun', $tahun_ajaran->uuid)->where('uuid_guru', auth()->user()->uuid)->first();
-        $mapel = Mapel::where('uuid', $akademik->uuid_mapel)->first();
-        $siswa = User::where('role', 'siswa')->where('uuid', $akademik->uuid_siswa)->count();
+        $akademik = Akademik::where('uuid_tahun', $tahun_ajaran->uuid)->where('uuid_guru', auth()->user()->uuid)->get();
+        $firstAkademik = $akademik->first();
+        // Misalnya struktur Akademik punya kolom uuid_mapel
+        $mapel = Mapel::where('uuid', $firstAkademik->uuid_mapel)->first();
+        $siswa = User::where('role', 'siswa')
+        ->whereIn('uuid', $akademik->pluck('uuid_siswa')->filter())
+        ->count();
 
         $forum = Forum::all();
         return view('guru.dashboard.index', compact(
