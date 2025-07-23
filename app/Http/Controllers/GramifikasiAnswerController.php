@@ -24,7 +24,6 @@ class GramifikasiAnswerController extends BaseController
         $akademik = Akademik::where('uuid_tahun', $tahun_ajaran->uuid)->where('uuid_mapel', $params)->where('uuid_siswa', auth()->user()->uuid)->first();
        // Ambil semua soal dengan uuid_akademik terkait
         $soal_gramifikasi_all = SoalGramifikasi::where('uuid_akademik', $akademik->uuid)->orderBy('created_at', 'desc')->get();
-        dd($soal_gramifikasi_all);
 
         // Kelompokkan berdasarkan uuid_misi dan ambil satu data dari masing-masing
         $soal_gramifikasi = $soal_gramifikasi_all->unique('uuid_misi')->values();
